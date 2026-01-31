@@ -169,9 +169,9 @@ function BioSection() {
   return (
     <div class="font-['Manrope',sans-serif] font-medium mt-[20px] text-[10px] tracking-[-0.09px]">
       <Animated delay={0.2} duration={0.6}>
-        <div class="relative flex flex-col space-y-6 mb-8">
+        <div class="relative flex flex-col space-y-6 mb-10">
           <div class="flex flex-col space-y-4 w-full max-w-[459px]">
-            <p class="text-[15px] leading-[24px] whitespace-normal" style={{ color: "var(--text-primary)" }}>
+            <p class="text-[15px] leading-[30px] whitespace-normal" style={{ color: "var(--text-primary)" }}>
               <a href="https://www.behance.net/uimorph" target="_blank" rel="noopener noreferrer" class="text-[#09f] hover:underline">Graphic designer</a>
               <span> by day, </span>
               <a href="https://dribbble.com/uimorph" target="_blank" rel="noopener noreferrer" class="text-[#09f] hover:underline">UI designer</a>
@@ -182,9 +182,9 @@ function BioSection() {
       </Animated>
 
       <Animated delay={0.3} duration={0.6}>
-        <div class="relative flex flex-col space-y-6 mb-8">
+        <div class="relative flex flex-col space-y-6 mb-10">
           <div class="flex flex-col space-y-3 w-full max-w-[395px]">
-            <p class="text-[15px] leading-[24px] whitespace-normal" style={{ color: "var(--text-primary)" }}>
+            <p class="text-[15px] leading-[30px] whitespace-normal" style={{ color: "var(--text-primary)" }}>
               I'm very passionate about the details, but ultimately, great products result from collaboration, smart thinking, and effective trade-offs.
             </p>
           </div>
@@ -194,8 +194,8 @@ function BioSection() {
       <Animated delay={0.4} duration={0.6}>
         <div class="relative flex flex-col space-y-6">
           <div class="flex flex-col space-y-3 w-full max-w-[444px]">
-            <p class="text-[15px] leading-[24px] whitespace-normal" style={{ color: "var(--text-primary)" }}>
-              I'm 22 years old and currently live in Mansoura, Egypt, working mostly remote. Most of my learning came from building, breaking, and shipping things on the internet.
+            <p class="text-[15px] leading-[30px] whitespace-normal" style={{ color: "var(--text-primary)" }}>
+              I'm 22 years old and currently live in Mansoura, Egypt, working mostly remote. most of my learning came from building, breaking, and shipping things on the internet.
             </p>
           </div>
         </div>
