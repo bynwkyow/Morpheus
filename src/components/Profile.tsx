@@ -83,14 +83,17 @@ function Animated(props: AnimatedProps) {
 function ProfileImage() {
   const [isHovered, setIsHovered] = createSignal(false);
   const [isExpanded, setIsExpanded] = createSignal(false);
+  const [imageRef, setImageRef] = createSignal<HTMLDivElement | null>(null);
+  const [centerOffsetX, setCenterOffsetX] = createSignal(0);
 
   const handleClick = (e: MouseEvent) => {
     e.stopPropagation();
     setIsExpanded(!isExpanded());
   };
 
+  const originalSize = 60;
+
   const getResponsiveScale = () => {
-    const originalSize = 60;
     const viewportWidth = window.innerWidth;
     const viewportHeight = window.innerHeight;
     
@@ -108,23 +111,69 @@ function ProfileImage() {
     return desktopScale;
   };
 
+  // Calculate the horizontal offset needed to center the element on viewport horizontal center
+  const calculateCenterOffsetX = () => {
+    const image = imageRef();
+    if (!image) return 0;
+    
+    const rect = image.getBoundingClientRect();
+    const viewportWidth = window.innerWidth;
+    const expandedScale = getResponsiveScale();
+    const expandedSize = originalSize * expandedScale;
+    
+    // Calculate where the image currently is (left edge)
+    const currentX = rect.left;
+    
+    // Calculate where the center of the expanded image should be (viewport horizontal center)
+    const targetCenterX = viewportWidth / 2;
+    
+    // The center of the expanded image relative to its top-left is (expandedSize/2)
+    // So the left edge should be at (targetCenterX - expandedSize/2)
+    const targetX = targetCenterX - (expandedSize / 2);
+    
+    // The offset needed to move from current position to target position
+    const offsetX = targetX - currentX;
+    
+    return offsetX;
+  };
+
+  // Update center offset on mount and resize
+  onMount(() => {
+    setCenterOffsetX(calculateCenterOffsetX());
+    
+    const handleResize = () => {
+      setCenterOffsetX(calculateCenterOffsetX());
+    };
+    
+    window.addEventListener('resize', handleResize);
+    window.addEventListener('scroll', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('scroll', handleResize);
+    };
+  });
+
+  // Recalculate when expanded state changes
+  createEffect(() => {
+    if (isExpanded()) {
+      setCenterOffsetX(calculateCenterOffsetX());
+    }
+  });
+
   const expandedScale = getResponsiveScale();
-  const originalSize = 60;
   const expandedSize = originalSize * expandedScale;
 
   return (
     <div 
       style={{
         width: "100%",
-        display: "flex",
-        "justify-content": isExpanded() ? "center" : "flex-start",
-        "align-items": "flex-start",
+        position: "relative",
         "margin-bottom": isExpanded() ? `${expandedSize - originalSize + 20}px` : "0px",
-        "margin-left": isExpanded() ? "120px" : "0px",
-        transition: "all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+        transition: "margin-bottom 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
       }}
     >
       <div
+        ref={setImageRef}
         class="rounded-[8px] overflow-hidden"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
@@ -134,13 +183,15 @@ function ProfileImage() {
           height: `${originalSize}px`,
           cursor: "pointer",
           transform: isExpanded() 
-            ? `scale(${expandedScale})` 
+            ? `translateX(${centerOffsetX()}px) scale(${expandedScale})` 
             : isHovered() 
-              ? "scale(1.05)" 
-              : "scale(1)",
-          "transform-origin": isExpanded() ? "top center" : "top left",
+              ? "translateX(0) scale(1.05)" 
+              : "translateX(0) scale(1)",
+          "transform-origin": "top left",
           transition: "transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
           "border-radius": "8px",
+          "z-index": isExpanded() ? 1000 : 1,
+          position: "relative",
         }}
       >
         <img
