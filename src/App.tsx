@@ -63,7 +63,7 @@ export default function App() {
           cursor: url('/Clickable.svg') 24 12, auto;
         }
       `}</style>
-      <div class="w-full max-w-[460px] mx-auto px-6 pt-[30px] pb-[120px] sm:px-8 md:px-4">
+      <div class="w-full max-w-[460px] lg:max-w-[600px] xl:max-w-[700px] mx-auto px-6 pt-[30px] pb-[120px] sm:px-8 md:px-4 lg:px-6 xl:px-8">
         <Profile />
       </div>
       <Nav soundEnabled={soundEnabled} setSoundEnabled={setSoundEnabled} playClickSound={playClickSound} />

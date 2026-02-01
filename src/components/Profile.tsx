@@ -89,7 +89,26 @@ function ProfileImage() {
     setIsExpanded(!isExpanded());
   };
 
-  const expandedScale = 7.5;
+  const getResponsiveScale = () => {
+    const originalSize = 60;
+    const viewportWidth = window.innerWidth;
+    const viewportHeight = window.innerHeight;
+    
+    // Desktop scale (unchanged)
+    const desktopScale = 7.5;
+    
+    // On mobile, calculate max scale that fits in viewport with padding
+    if (viewportWidth < 768) {
+      const padding = 40;
+      const maxScaleX = (viewportWidth - padding) / originalSize;
+      const maxScaleY = (viewportHeight - padding) / originalSize;
+      return Math.min(maxScaleX, maxScaleY, desktopScale);
+    }
+    
+    return desktopScale;
+  };
+
+  const expandedScale = getResponsiveScale();
   const originalSize = 60;
   const expandedSize = originalSize * expandedScale;
 
@@ -170,8 +189,8 @@ function BioSection() {
     <div class="font-['Manrope',sans-serif] font-medium mt-[20px] text-[10px] tracking-[-0.09px]">
       <Animated delay={0.2} duration={0.6}>
         <div class="relative flex flex-col space-y-6 mb-10">
-          <div class="flex flex-col space-y-4 w-full max-w-[459px]">
-            <p class="text-[15px] leading-[30px] whitespace-normal" style={{ color: "var(--text-primary)" }}>
+          <div class="flex flex-col space-y-4 w-full">
+            <p class="text-[15px] lg:text-[16px] xl:text-[17px] leading-[30px] lg:leading-[32px] xl:leading-[34px] whitespace-normal" style={{ color: "var(--text-primary)" }}>
               <a href="https://www.behance.net/uimorph" target="_blank" rel="noopener noreferrer" class="text-[#09f] hover:underline">Graphic designer</a>
               <span> by day, </span>
               <a href="https://dribbble.com/uimorph" target="_blank" rel="noopener noreferrer" class="text-[#09f] hover:underline">UI designer</a>
@@ -183,8 +202,8 @@ function BioSection() {
 
       <Animated delay={0.3} duration={0.6}>
         <div class="relative flex flex-col space-y-6 mb-10">
-          <div class="flex flex-col space-y-3 w-full max-w-[395px]">
-            <p class="text-[15px] leading-[30px] whitespace-normal" style={{ color: "var(--text-primary)" }}>
+          <div class="flex flex-col space-y-3 w-full">
+            <p class="text-[15px] lg:text-[16px] xl:text-[17px] leading-[30px] lg:leading-[32px] xl:leading-[34px] whitespace-normal" style={{ color: "var(--text-primary)" }}>
               I'm very passionate about the details, but ultimately, great products result from collaboration, smart thinking, and effective trade-offs.
             </p>
           </div>
@@ -193,8 +212,8 @@ function BioSection() {
 
       <Animated delay={0.4} duration={0.6}>
         <div class="relative flex flex-col space-y-6">
-          <div class="flex flex-col space-y-3 w-full max-w-[444px]">
-            <p class="text-[15px] leading-[30px] whitespace-normal" style={{ color: "var(--text-primary)" }}>
+          <div class="flex flex-col space-y-3 w-full">
+            <p class="text-[15px] lg:text-[16px] xl:text-[17px] leading-[30px] lg:leading-[32px] xl:leading-[34px] whitespace-normal" style={{ color: "var(--text-primary)" }}>
               I'm 22 years old and currently live in Mansoura, Egypt, working mostly remote. most of my learning came from building, breaking, and shipping things on the internet.
             </p>
           </div>
