@@ -34,3 +34,4 @@ npm-debug.log*
 # These are old files that should be deleted:
 # src/components/Frame14.tsx
 # src/components/svg-paths.ts
+.env*.local

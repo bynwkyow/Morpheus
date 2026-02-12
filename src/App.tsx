@@ -59,7 +59,7 @@ export default function App() {
           cursor: url('/Cursor.svg') 24 6, auto;
         }
         
-        a, button, [role="button"], .pointer-events-auto {
+        a, button, [role="button"], .pointer-events-auto, [data-clickable], input, select, textarea, label, [onclick] {
           cursor: url('/Clickable.svg') 24 12, auto;
         }
       `}</style>

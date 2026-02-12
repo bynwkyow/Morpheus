@@ -36,6 +36,7 @@ function DockIcon(props: DockIconProps) {
 
   return (
     <div
+      data-clickable
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       onClick={handleClick}
@@ -47,7 +48,6 @@ function DockIcon(props: DockIconProps) {
         "align-items": "center",
         "justify-content": "center",
         "border-radius": "50%",
-        cursor: props.onClick || props.isCopy ? "pointer" : "default",
         color: hovered()
           ? (props.isDark() ? "rgba(255,255,255,0.95)" : "rgba(23,23,23,0.95)")
           : (props.isDark() ? "rgba(163,163,163,1)" : "rgba(100,100,100,1)"),

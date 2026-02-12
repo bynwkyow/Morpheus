@@ -208,13 +208,13 @@ function ProfileImage() {
       <div
         ref={setImageRef}
         class="rounded-[8px] overflow-hidden"
+        data-clickable
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         onClick={handleClick}
         style={{
           width: `${originalSize}px`,
           height: `${originalSize}px`,
-          cursor: "pointer",
           transform: isExpanded()
             ? `translateX(${centerOffsetX()}px) scale(${expandedScale})`
             : isHovered()
@@ -323,7 +323,7 @@ function BioSection(props: BioSectionProps) {
             </span>
             <span
               onClick={props.onNavigateToActivity}
-              class="cursor-pointer inline-flex items-center gap-1.5 underline hover:opacity-70 transition-opacity"
+              class="inline-flex items-center gap-1.5 underline hover:opacity-70 transition-opacity"
               style={{ 
                 color: "var(--text-primary)",
                 "text-decoration-color": "var(--text-primary)",
